@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>ENSERCO GLOBAL SERVICIOS, S.L.</title>
+    <script src="https://kit.fontawesome.com/9b8103ef2f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="estilos.css">
+</head>
+
+<body>
+    <h1>Enserco Global Servicios, S.L</h1>
+    <nav>
+        <ul>
+            <li><a href="#">Contacto</a></li>
+            <li><a href="#">Galería</a></li>
+            <li><a href="#">Presupuesto</a></li>
+        </ul>
+    </nav>
+
+    <div id="contenedor">
+        <form action="pagina.php" method="POST" class="formulario" id="formulario">
+            <fieldset class="form-control">
+                <legend class="datos">Datos</legend>
+                <div>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" class="valida">
+                    <br>
+                    <small>Error mensaje</small>
+                </div>
+                <div>
+                    <label for="apellidos">Apellidos:</label>
+                    <input type="text" id="apellidos" name="apellidos" class="valida">
+                    <br />
+                    <small>Error mensaje</small>
+                </div>
+                <div>
+                    <label for="telefono">Telefono de contacto:</label>
+                    <input type="tel" id="telefono" name="telefono" class="valida">
+                    <br />
+                    <small>Error mensaje</small>
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email" class="valida">
+                    <br />
+                    <small>Error mensaje</small>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Presupuesto</legend>
+                <label for="producto">Elige un producto</label>
+                <select class="colorgris" name="producto" id="producto">
+                    <option value="0">Seleccione un producto</option>
+                    <option value="100">Producto 1 - €100</option>
+                    <option value="150">Producto 2 - €150</option>
+                    <option value="200">Producto 3 - €200</option>
+                </select>
+                <br />
+
+                <div>
+                    <label for="plazo">Plazo en meses:</label>
+                    <input type="number" id="plazo" name="plazo" min="1" value="1">
+                </div>
+
+                <div>
+                    <p>Elige los extras para el producto:</p>
+                    <input type="checkbox" id="color" name="color" value="50">
+                    <label class="extras" for="color">Tamaño de foto - €50</label>
+
+                    <input type="checkbox" id="tipografia" name="tipografia" value="30">
+                    <label class="extras" for="tipografia">Impresión de foto - €30</label>
+
+                    <input type="checkbox" id="terminacion" name="terminacion" value="40">
+                    <label class="extras" for="terminacion">Enmarcado de foto - €40</label>
+
+                    <input type="checkbox" id="nombrep" name="nombrep" value="20">
+                    <label class="extras" for="nombrep">Envío de foto - €20</label>
+                </div>
+
+                <br />
+                <label for="presupuesto">Presupuesto estimado:</label>
+                <input type="text" id="presupuesto" name="presupuesto" readonly>
+            </fieldset>
+            <fieldset>
+                <legend>Aceptación de Condiciones y envío de presupuesto</legend>
+                <label for="privacidad">He leído la política de privacidad</label>
+                <input type="checkbox" id="privacidad" name="privacidad" required>
+                <br />
+                <input class="colorgris" type="submit" value="Enviar Formulario">
+                <input class="colorgris" type="reset" value="Borrar Formulario">
+            </fieldset>
+            <div>
+            </div>
+        </form>
+    </div>
+    <script>
+        const productoSelect = document.getElementById("producto");
+        const plazoInput = document.getElementById("plazo");
+        const extrasCheckboxes = document.querySelectorAll('.extras input[type="checkbox"]');
+        const presupuestoInput = document.getElementById("presupuesto");
+
+        [productoSelect, plazoInput, ...extrasCheckboxes].forEach((element) => {
+            element.addEventListener("input", calcularPresupuesto);
+        });
+
+        function calcularPresupuesto() {
+            let presupuesto = parseInt(productoSelect.value) + (parseInt(plazoInput.value) * 10);
+
+            extrasCheckboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    presupuesto += parseInt(checkbox.value);
+                }
+            });
+
+            presupuestoInput.value = presupuesto;
+        }
+    </script>
+
+    <footer class="footer">
+        <div class="logo">
+            <h2>Enserco Global Servicios, SL.</h2>
+        </div>
+        <div class="box">
+            <h2>SIGUENOS</h2>
+            <div class="red-social">
+                <a href="#" class="fa fa-facebook"></a>
+                <a href="#" class="fa fa-instagram"></a>
+                <a href="#" class="fa fa-twitter"></a>
+                <a href="#" class="fa fa-youtube"></a>
+            </div>
+            <p>Rosalia de Castro, 29 28992-Torrejón de la calzada (Madrid)</p>
+            <p>Todos los derechos reservados</p>
+        </div>
+    </footer>
+</body>
+
+</html>
